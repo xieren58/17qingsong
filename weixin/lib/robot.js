@@ -20,12 +20,14 @@ var Robot = function () {
 
   self.helpArr = ['？', '?', '@', 'h', 'help'];
 
-  self._usageText = ['调戏规则：'].concat(_.map(self._keys,
+  self._usageText = ['查询规则：'].concat(_.map(self._keys,
     function(k){ return util.format('%s: %s', self._dict[k], k); })).concat([
+    '查询深圳通余额: szt深圳通卡号',
     '规则帮助: ?',
     '例如: 发送 qs 即可获得最新的一期【每日轻松一刻】，',
     '发送 qs20120920 即可获得2012年9月20日的【每日轻松一刻】.',
-    '欢迎大家前来骚扰调戏。']).join('\n');
+    '发送 szt深圳通卡号 即可获得你的深圳通余额（ 将深圳通卡号换成你的卡号）.',
+    '欢迎大家前来骚扰。']).join('\n');
 
   self._pattern = /^([a-z]{2}){1}(\d{4}\d{2}\d{2})?$/;
 
