@@ -15,7 +15,9 @@
     "underscore": "*",
     "async": "*",
     "xml2js": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "iconv-lite": "*",
+    "request": "*"
   },
   "devDependencies": {
 

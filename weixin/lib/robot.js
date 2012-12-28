@@ -4,6 +4,8 @@ var util = require('util');
 var _ = require('underscore');
 var cheerio = require('cheerio');
 var moment = require('moment');
+var request = require('request');
+var iconv = require('iconv-lite');
 
 var dict = require('../config').dict;
 var News = require('../models/news');
@@ -26,6 +28,13 @@ var Robot = function () {
     '欢迎大家前来骚扰调戏。']).join('\n');
 
   self._pattern = /^([a-z]{2}){1}(\d{4}\d{2}\d{2})?$/;
+
+  self._sztUrl = 'http://121.15.13.49:8080/sztnet/qryCard.do';
+  self._sztHeaders = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11'
+  };
+  self._sztDefaultErr = '深圳通官方系统没有返回数据，请稍候再试!';
+  self._sztQueryErr = '请检查卡号，深圳通卡号必须是9位或12位!';
 };
 
 Robot.prototype.find = function (q, callback) {
@@ -33,6 +42,36 @@ Robot.prototype.find = function (q, callback) {
   q = q.trim().toLowerCase();
 
   if (q) {
+    // for query szt balance
+    if (q.substr(0, 3) === 'szt') {
+      if (q.substr(3, 9).length === 9 || q.substr(3, 12).length === 12) {
+        var cardno = q.substr(3, 12);
+        request.post(self._sztUrl, {form: {cardno: cardno}, headers: self._sztHeaders,
+          encoding: 'binary'}, function (err, res, body) {
+          if (! err && res.statusCode == 200) {
+            var buf = new Buffer(body,'binary');
+            var str = iconv.decode(buf, 'GBK');
+            var $ = cheerio.load(str);
+
+            // console.log($('form').first().next().html());
+            var cardRealAmt = $('#cardRealAmt');
+            if (cardRealAmt) {
+              var balance = cardRealAmt.next().text();
+              callback(util.format('深圳通[%s]%s%s', cardno, $('#cardRealAmt').text(), balance));
+            } else if ($('form').first() && $('form').first().next().text().indexOf() !== -1) {
+              callback(self._sztQueryErr);
+            } else {
+              callback(self._sztDefaultErr);
+            }
+
+          } else {
+            callback(self._sztDefaultErr);
+          }
+        });
+      } else {
+        callback(self._sztQueryErr);
+      }
+    } else
     if (_.indexOf(self.helpArr, q) !== -1) {
       callback(self._usageText);
     } else if (self._pattern.test(q)) {
