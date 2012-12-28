@@ -2,3 +2,4 @@ node_modules
 dump_*
 practice/*.pdf
 practice/*.png
+tmp/
