@@ -1,0 +1,102 @@
+
+<div class="news">
+  <div class="page-header">
+    <h2>{{news.title}}</h2>
+    <small>
+        <em>来源: 网易,&nbsp;&nbsp;{{news.ptime}}, 
+            &nbsp;&nbsp;{{news.tags}},
+            &nbsp;&nbsp;{{#if news.views}}{{news.views}}{{else}}2{{/if}} 人围观,
+            &nbsp;&nbsp;<a href="#comments"><span class="ds-thread-count" data-thread-key="{{news.docid}}"></span>,</a>
+            &nbsp;&nbsp;<a title="下载txt" href="/d/{{news.docid}}.txt">下载({{#if news.download}}{{news.download}}{{else}}0{{/if}})</a>
+        </em>
+    </small>
+    
+    {{#if session.user}}
+    &nbsp;&nbsp;<a href="/admin/news/{{news.docid}}/autoupdate"><i class="icon-refresh"></i>&nbsp;AutoUpdate</a>,
+    &nbsp;<a href="/admin/news/{{news.docid}}/edit"><i class="icon-edit"></i>&nbsp;Edit</a>,
+    &nbsp;&nbsp;<a href="javascript:void(0)" onClick="avascript:if (confirm('Are you sure to delete this news???')) {window.location.href='/admin/news/{{news.docid}}/del'};"><i class="icon-remove"></i>&nbsp;Delete</a>
+    {{/if}}
+  </div>
+
+  <div class="news-content content-{{tag2c news.tags.[0]}}">
+    {{{news.marked}}}
+  </div>
+
+  <p><a href="http://3g.163.com/touch/article.html?docid={{news.docid}}" target="_blank">网易原文链接</a></p>
+<br>
+<div class="bdlikebutton"></div>
+<script id="bdlike_shell"></script>
+<script>
+var bdShare_config = {
+  "type":"medium",
+  "color":"blue",
+  "uid":"6107738",
+  "likeText":"内容很赞",
+  "likedText":"顶爆啦"
+};
+document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + Math.ceil(new Date()/3600000);
+</script>
+<br>
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+<span class="bds_more">分享到：</span>
+<a class="bds_qzone">QQ空间</a>
+<a class="bds_tsina">新浪微博</a>
+<a class="bds_tqq">腾讯微博</a>
+<a class="bds_t163">网易微博</a>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6107738" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+</script>
+<!-- Baidu Button END -->
+</div>
+
+<div class="clearfix"></div>
+<hr/>
+
+{{> next}}
+
+{{#if relatedNews}}
+<div class="row">
+<div class="related-news span12">
+<strong>您也感兴趣...</strong>
+<br/><br/>
+<ul class="thumbnails span12">
+  {{#each relatedNews}}
+  <li class="span2">
+    <a href="/news/{{this.docid}}" title="{{this.title}}">
+    <div class="thumbnail">
+      <img class="lazy" src="/img/grey.gif" data-original="{{miniImg this.cover}}" alt="{{this.title}}">
+      <noscript><img src="{{miniImg this.cover}}" alt="{{this.title}}"></noscript>
+      <h6>{{this.title}}</h6>
+    </div>
+    </a>
+  </li>
+  {{/each}}
+</ul>
+</div>
+</div>
+{{/if}}
+
+<div class="row">
+  <div class="span8" id="comments">
+  <!-- Duoshuo Comment BEGIN -->
+   <div class="ds-thread" data-thread-key="{{news.docid}}" data-title="{{news.title}}" data-category="{{news.tags}}" ></div>
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"17qingsong"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->
+  </div>
+</div>
+

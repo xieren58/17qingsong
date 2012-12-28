@@ -1,0 +1,48 @@
+{{#if message}}
+<div class="alert alert-error">
+<p>{{message}}</p>
+</div>
+{{/if}}
+
+
+<form id="reset-form" action="/admin/saveReset" method="post">
+  <input type="hidden" name="_csrf" value="{{token}}" >
+<fieldset>
+    <legend>重置密码</legend>
+ 
+    <label for="oldPassword">原密码</label>
+   
+    <input type="password" id="oldPassword" name="oldPassword" >
+
+    <label for="password">新密码</label>
+   
+    <input type="password" id="password" name="password" >
+
+    <label for="confirmPassword">确认新密码</label>
+   
+    <input type="password" id="confirmPassword" name="confirmPassword" >
+    
+    
+    <p><button type="submit" class="btn">Submit</button></p>
+</fieldset>
+</form>
+
+
+
+{{#contentFor 'js'}}
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    $("#reset-form").validate({
+        rules: {
+            oldPassword: "required",
+            password: "required",
+            confirmPassword: {
+              equalTo: "#password"
+            }
+        }
+    });
+});
+</script>
+
+{{/contentFor}}

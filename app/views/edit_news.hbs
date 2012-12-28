@@ -1,0 +1,53 @@
+
+
+<form id="news-form" action="/admin/news/{{news.docid}}/saveEdit" method="post">
+  <input type="hidden" name="_csrf" value="{{token}}" >
+<fieldset>
+    <legend>Edit News</legend>
+
+    <label for="inputTile">Title</label>
+
+    <input type="text" id="inputTile" name="title" value="{{news.title}}" class="required">
+
+ 
+    <label for="inputTags">Tags</label>
+   
+    <input type="text" id="inputTags" name="tags" value="{{news.tags}}" class="required"> (多个请用英文逗号隔开)
+
+    <label for="inputDigest">Digest</label>
+
+    <textarea name="digest" id="inputDigest" class="span8 required" rows="6">{{news.digest}}</textarea>
+
+    <label for="inputCover">Cover</label>
+   
+    <input type="text" id="inputCover" name="cover" value="{{news.cover}}" class="input-xxlarge required">
+    
+
+    <label for="inputContent">Content</label>
+
+    <textarea name="marked" id="inputContent" class="span8 required" rows="16">{{news.marked}}</textarea>
+    
+    <label class="checkbox">
+      {{#if news.disableAutoUpdate}}
+      <input type="checkbox" name="disableAutoUpdate" checked="checked"> DisableAutoUpdate
+      {{else}}
+      <input type="checkbox" name="disableAutoUpdate" > DisableAutoUpdate
+      {{/if}}
+    </label>
+
+    <br />
+
+    <p><button type="submit" class="btn">Submit</button></p>
+
+  </fieldset>
+</form>
+
+{{#contentFor 'js'}}
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  $("#news-form").validate();
+});
+
+</script>
+{{/contentFor}}

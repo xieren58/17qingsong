@@ -1,0 +1,15 @@
+
+
+<ul class="topic-list">
+    {{#each news}}
+    <li>
+        <time>{{dateFormat this.time}}</time>
+        <a href="/news/{{this.docid}}" class="bigger-size">
+            {{this.title}}
+        </a>
+    </li>
+    {{/each}}
+
+</ul>
+
+{{> pager}}

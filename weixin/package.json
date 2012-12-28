@@ -1,0 +1,26 @@
+{
+  "name": "17qingsong",
+  "version": "0.1.0",
+  "homepage": "http://weixin.17qingsong.com",
+  "description": "17qingsong",
+  "author": "ccz",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "~3.0.0",
+    "mongoskin": "*",
+    "moment": "*",
+    "underscore": "*",
+    "async": "*",
+    "xml2js": "*",
+    "cheerio": "*"
+  },
+  "devDependencies": {
+
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  }
+}

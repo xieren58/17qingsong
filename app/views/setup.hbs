@@ -1,0 +1,29 @@
+
+
+{{#if message}}
+<div class="alert alert-error">
+<p>{{message}}</p>
+</div>
+{{/if}}
+
+<form action="/admin/saveSetup" method="post">
+  <input type="hidden" name="_csrf" value="{{token}}" >
+<fieldset>
+    <legend>Setup Admin</legend>
+
+    <label for="username">Username</label>
+
+    <input type="text" id="username" name="username">
+ 
+    <label for="password">Password</label>
+   
+    <input type="password" id="password" name="password" >
+
+    <label for="confirmPassword">Confirm Password</label>
+   
+    <input type="password" id="confirmPassword" name="confirmPassword" >
+    
+    
+    <p><button type="submit" class="btn">Submit</button></p>
+</fieldset>
+</form>

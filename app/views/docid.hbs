@@ -1,0 +1,36 @@
+{{#if message}}
+<div class="alert alert-error">
+<p>{{message}}</p>
+</div>
+{{/if}}
+
+
+
+
+<form id="docid-form" action="/admin/news/saveDocid" method="post">
+  <input type="hidden" name="_csrf" value="{{token}}" >
+<fieldset>
+    <legend>添加docid</legend>
+ 
+    <label for="docid">docid</label>
+   
+    <input type="text" id="docid" name="docid" class="input-xxlarge required" />(多个,英文逗号分隔)
+
+   
+    
+    
+    <p><button type="submit" class="btn">Submit</button></p>
+</fieldset>
+</form>
+
+
+
+{{#contentFor 'js'}}
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    $("#docid-form").validate();
+});
+</script>
+
+{{/contentFor}}
