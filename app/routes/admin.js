@@ -3,7 +3,7 @@ var User = require('../models/user');
 var News = require('../models/news');
 var md5 = require('../lib/utils').md5;
 var tagFilter = require('../lib/utils').tagFilter;
-var crawlerOne = require('../163').crawlerOne;
+var crawlerOne = require('../netease').crawlerOne;
 
 /**
 * for user

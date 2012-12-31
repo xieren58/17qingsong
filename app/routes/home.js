@@ -7,16 +7,12 @@ var async = require('async');
 
 var News = require('../models/news');
 
-var crawlerAll = require('../163').crawlerAll;
+var crawlerAll = require('../netease').crawlerAll;
 
-var tt = require('../config').tt;
+var tt = require('../config').Config.tt;
 
-var hotQty = require('../config').config.hotQty;
+var hotQty = require('../config').Config.hotQty;
 
-
-// exports.orca = function (req, res, next) {
-//   res.sendfile(process.cwd() + '/public/orca.txt');
-// };
 
 var index = function (req, res, next) {
   var getNewss = function (callback) {

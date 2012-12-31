@@ -6,12 +6,12 @@ var util = require('util');
 var RSS = require('rss');
 
 var News = require('../models/news');
-var config = require('../config').config;
+var CONFIG = require('../config').Config;
 
 
 var index = function (req, res, next) {
   var feed = new RSS({
-    title: config.siteName,
+    title: CONFIG.siteName,
     description: '17轻松，让您每日轻松一刻！',
     feed_url: 'http://www.17qingsong.com/rss',
     site_url: 'http://www.17qingsong.com',
@@ -20,7 +20,7 @@ var index = function (req, res, next) {
   });
 
   /* loop over data and add to feed */
-  News.findLimit({}, config.maxRssItems, null, function (err, newss) {
+  News.findLimit({}, CONFIG.maxRssItems, null, function (err, newss) {
     if (! err) {
       newss.forEach(function (news) {
         var title = news.title;

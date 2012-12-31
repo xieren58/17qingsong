@@ -2,8 +2,11 @@
 /**
  * Module dependencies.
  */
-var config = require('./config').config;
-process.env.TZ = config.timezone;
+// var config = require('./config').config;
+var CONFIG = require('./config').Config;
+process.env.TZ = CONFIG.timezone;
+
+// console.log(CONFIG.dbUrl);
 
 var http = require('http');
 var path = require('path');
@@ -23,7 +26,7 @@ var checkAuth = require('./lib/utils').checkAuth;
 
 var routes = require('./routes');
 
-var crawlerInterval = require('./163').crawlerInterval;
+var crawlerInterval = require('./netease').crawlerInterval;
 
 var app = express();
 
@@ -40,51 +43,52 @@ hbs.registerHelper('pagination', helpers.pagination);
 /**
  * app config
  */
-app.configure(function(){
-  app.set('port', config.port);
+// app.configure(function(){
+app.set('port', CONFIG.port);
 
-  app.engine('hbs', hbs.express3({
-    defaultLayout: __dirname + '/views/layout.hbs',
-    partialsDir: __dirname + '/views/partials'
-  }));
-  app.set('view engine', 'hbs');
-  app.set('views', __dirname + '/views');
+app.engine('hbs', hbs.express3({
+  defaultLayout: __dirname + '/views/layout.hbs',
+  partialsDir: __dirname + '/views/partials'
+}));
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
 
-  app.use(express.favicon(path.join(__dirname, 'public/favicon.ico')));
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser(config.cookieSecret));
-  
-  // app.use(express.session());
-  app.use(express.session({
-    secret: config.cookieSecret,
-    store: new MongoStore({
-      url: config.dbUrl
-    })
-  }));
+app.use(express.favicon(path.join(__dirname, 'public/favicon.ico')));
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.cookieParser(CONFIG.cookieSecret));
 
-  app.use(express.csrf());
-  app.use(function (req, res, next) {
-    res.locals.token = req.session ? req.session._csrf : '';
-    res.locals.session = req.session;
-    next();
-  });
+// app.use(express.session());
+app.use(express.session({
+  secret: CONFIG.cookieSecret,
+  store: new MongoStore({
+    url: CONFIG.dbUrl
+  })
+}));
 
-  app.use(flash());
-  app.use(app.router);
-  // app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.disable('x-powered-by');
-
+app.use(express.csrf());
+app.use(function (req, res, next) {
+  res.locals.token = req.session ? req.session._csrf : '';
+  res.locals.session = req.session;
+  next();
 });
+
+app.use(flash());
+app.use(app.router);
+// app.use(require('stylus').middleware(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.disable('x-powered-by');
+
+// });
 
 // app.configure('development', function(){
 //   app.use(express.errorHandler());
 // });
 
 // all environments
-app.set('siteName', config.siteName);
+app.set('siteName', CONFIG.siteName);
+app.set('urls', CONFIG.urls);
 // app.disable('x-powered-by');
 // 404
 app.use(function(req, res, next){
@@ -114,7 +118,7 @@ if ('development' == app.get('env')) {
 if ('production' == app.get('env')) {
   // app.set('db uri', 'n.n.n.n/prod');
   // app.use(express.errorHandler());
-  // app.use(express.static(path.join(__dirname, 'public'),  { maxAge: config.staticMaxAge }));
+  // app.use(express.static(path.join(__dirname, 'public'),  { maxAge: CONFIG.staticMaxAge }));
   app.use(express.compress());
   // 500
   app.use(function(err, req, res, next){
@@ -161,7 +165,7 @@ var netEaseCrawler = function () {
 //     console.log('worker ' + worker.process.pid + ' died');
 //   });
 
-//   setInterval(netEaseCrawler, config.interval);
+//   setInterval(netEaseCrawler, CONFIG.interval);
 
 //   if ('development' == app.get('env')) {
 //     var child = null;
@@ -185,6 +189,6 @@ var netEaseCrawler = function () {
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express Start at http://127.0.0.1:" + app.get('port'));
-  // console.log(config.interval);
-  setInterval(netEaseCrawler, config.interval);
+  // console.log(CONFIG.interval);
+  setInterval(netEaseCrawler, CONFIG.interval);
 });

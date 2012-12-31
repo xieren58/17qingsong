@@ -54,13 +54,6 @@ _| |_./ /   | (_| || || | | || (_| |\__ \| (_) || | | || (_| |
               <li id="entertainmentBigBang"><a href="/tag/{{urlEncode '娱乐BigBang'}}">娱乐BigBang</a></li>
               <li id="military"><a href="/tag/{{urlEncode '侃军事'}}">侃军事</a></li>
               <li id="easeBaike"><a href="/tag/{{urlEncode '易百科'}}">易百科</a></li>
-              {{#if session.user}}
-                <li><a href="/admin/news/addDocid">addDocid</a></li>
-                <li><a href="/admin/news/get163All">Get163All</a></li>
-                <li><a href="javascript:void(0)" onclick="javascript:if (confirm('Are you sure to delete all news???')) {window.location.href='/admin/news/delAll'};">DelAllNews</a></li>
-                <li><a href="/admin/reset">Reset</a></li>
-                <li><a href="/admin/logout">Logout</a></li>
-              {{/if}}
             </ul>
             <form class="navbar-search pull-left" action="/search">
               <input type="text" class="search-query span2" name="q" value="{{#if keyword}}{{keyword}}{{/if}}">
@@ -75,6 +68,16 @@ _| |_./ /   | (_| || || | | || (_| |\__ \| (_) || | | || (_| |
       <p class="chromeframe">您还在使用 <strong>IE6</strong>？ 请 <a href="http://browsehappy.com/">升级到IE7以上</a> 或者 <a href="http://www.google.com/chromeframe/?redirect=true">启用 Google Chrome Frame</a> 以获得更好的体验.</p>
     <![endif]-->
 
+      {{#if session.user}}
+      <div class="well well-small">
+      <ul class="inline">
+        <li><a href="/admin/news/addDocid">[addDocid]</a>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0)" onclick="javascript:if (confirm('Are you sure to delete all news???')) {window.location.href='/admin/news/delAll'};">[DelAllNews]</a>&nbsp;&nbsp;</li>
+        <li><a href="/admin/news/get163All">[Get163All]</a>&nbsp;&nbsp;</li>
+        <li><a href="/admin/reset">[Reset]</a>&nbsp;&nbsp;</li>
+        <li><a href="/admin/logout">[Logout]</a>&nbsp;&nbsp;</li>
+      </ul></div>
+      {{/if}}
 
         {{{body}}}
         <footer>

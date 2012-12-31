@@ -14,12 +14,13 @@
     "mongoskin": "*",
     "moment": "*",
     "connect-flash": "*",
-    "underscore": "*",
     "request": "*",
     "async": "*",
     "rss": "*",
     "cheerio": "*",
-    "connect-mongo": "*"
+    "connect-mongo": "*",
+    "lodash": "*",
+    "config": "*"
   },
   "devDependencies": {
     "colors": "*",

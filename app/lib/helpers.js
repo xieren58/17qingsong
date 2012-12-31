@@ -1,7 +1,9 @@
 var moment = require('moment');
-var _ = require('underscore');
+// var _ = require('underscore');
+var _ = require("lodash");
 
-var tt = require('../config').tt;
+// var tt = require('../config').tt;
+var tt = require('../config').Config.tt;
 
 exports.dateFormat = function(d) {
   return moment(d).format('YYYY-MM-DD');
