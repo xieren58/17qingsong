@@ -46,7 +46,7 @@ Robot.prototype.find = function (q, callback) {
   if (q) {
     // for query szt balance
     if (q.substr(0, 3) === 'szt') {
-      if (q.substr(3, 9).length === 9 || q.substr(3, 12).length === 12) {
+      if (q.length === (3 + 9) || q.length === (3 + 12)) {
         var cardno = q.substr(3, 12);
         request.post(self._sztUrl, {form: {cardno: cardno}, headers: self._sztHeaders,
           encoding: 'binary'}, function (err, res, body) {
@@ -60,8 +60,8 @@ Robot.prototype.find = function (q, callback) {
             if (cardRealAmt) {
               var balance = cardRealAmt.next().text();
               callback(util.format('深圳通[%s]%s%s', cardno, $('#cardRealAmt').text(), balance));
-            } else if ($('form').first() && $('form').first().next().text().indexOf() !== -1) {
-              callback(self._sztQueryErr);
+            } else if ($('form').first() && $('form').first().next('div')) {
+              callback($('form').first() && $('form').first().next('div').text());
             } else {
               callback(self._sztDefaultErr);
             }
