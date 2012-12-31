@@ -57,10 +57,12 @@ Robot.prototype.find = function (q, callback) {
 
             // console.log($('form').first().next().html());
             var cardRealAmt = $('#cardRealAmt');
-            if (cardRealAmt) {
+            if (cardRealAmt.length > 0) {
+              // console.log(cardRealAmt);
               var balance = cardRealAmt.next().text();
               callback(util.format('深圳通[%s]%s%s', cardno, $('#cardRealAmt').text(), balance));
-            } else if ($('form').first() && $('form').first().next('div')) {
+            } else if ($('form').first() && $('form').first().next('div').length > 0) {
+              // console.log($('form').first() && $('form').first().next('div'));
               callback($('form').first() && $('form').first().next('div').text());
             } else {
               callback(self._sztDefaultErr);
