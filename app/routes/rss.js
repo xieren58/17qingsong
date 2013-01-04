@@ -6,7 +6,7 @@ var util = require('util');
 var RSS = require('rss');
 
 var News = require('../models/news');
-var CONFIG = require('../config').Config;
+var CONFIG = require('config').Config;
 
 
 var index = function (req, res, next) {

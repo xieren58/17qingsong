@@ -3,8 +3,8 @@ var crypto = require('crypto');
 // var _ = require("underscore");
 var _ = require("lodash");
 
-// var salt = require('../config').config.salt;
-var salt = require('../config').Config.salt;
+// var salt = require('config').config.salt;
+var salt = require('config').Config.salt;
 
 exports.md5 = function (str) {
     return crypto.createHmac('sha1', salt).update(str).digest('hex');

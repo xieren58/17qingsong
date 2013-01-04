@@ -7,9 +7,9 @@ var async = require('async');
 
 var News = require('../models/news');
 
-var tt = require('../config').Config.tt;
+var tt = require('config').Config.tt;
 
-var hotQty = require('../config').Config.hotQty;
+var hotQty = require('config').Config.hotQty;
 
 
 var index = function (req, res, next) {

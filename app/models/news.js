@@ -1,7 +1,8 @@
 
-// var db = require('../config').db;
-var db = require('../config').db;
-var limit = require('../config').Config.limit;
+
+// var db = require('config').db;
+var db = require('../db').db;
+var limit = require('config').Config.limit;
 
 db.bind('news');
 

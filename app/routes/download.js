@@ -10,7 +10,7 @@ var cheerio = require('cheerio');
 var moment = require('moment');
 
 var News = require('../models/news');
-// var config = require('../config').config;
+// var config = require('config').config;
 
 var baseDir = process.cwd() + '/tmp/';
 

@@ -2,21 +2,21 @@
 /**
  * Module dependencies.
  */
-// var config = require('./config').config;
-var CONFIG = require('./config').Config;
+// var config = require('config').config;
+var CONFIG = require('config').Config;
 process.env.TZ = CONFIG.timezone;
 
-// console.log(CONFIG.dbUrl);
 
 var http = require('http');
 var path = require('path');
-var exec = require('child_process').exec;
+// var exec = require('child_process').exec;
 
 // var cluster = require('cluster');
 // var numCPUs = require('os').cpus().length;
 
 var express = require('express');
 var MongoStore = require('connect-mongo')(express);
+var dbUrl = require('./db').dbUrl;
 
 var hbs = require('express-hbs');
 var flash = require('connect-flash');
@@ -26,9 +26,9 @@ var checkAuth = require('./lib/utils').checkAuth;
 
 var routes = require('./routes');
 
-var crawlerInterval = require('./netease').crawlerInterval;
+// var crawlerInterval = require('./netease').crawlerInterval;
 
-var app = express();
+var app = module.exports = express();
 
 /**
  * helpers
@@ -63,7 +63,7 @@ app.use(express.cookieParser(CONFIG.cookieSecret));
 app.use(express.session({
   secret: CONFIG.cookieSecret,
   store: new MongoStore({
-    url: CONFIG.dbUrl
+    url: dbUrl
   })
 }));
 
@@ -88,7 +88,7 @@ app.disable('x-powered-by');
 
 // all environments
 app.set('siteName', CONFIG.siteName);
-app.set('urls', CONFIG.urls);
+// app.set('urls', CONFIG.urls);
 // app.disable('x-powered-by');
 // 404
 app.use(function(req, res, next){
@@ -103,15 +103,15 @@ if ('development' == app.get('env')) {
   // app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
 
-  var child = null;
+  // var child = null;
 
-  child = exec('grunt', function (error, stdout, stderr) {
-    console.log('stdout: ' + stdout);
-    // console.log('stderr: ' + stderr);
-    if (error !== null) {
-      console.log('exec error: ' + error);
-    }
-  });
+  // child = exec('grunt', function (error, stdout, stderr) {
+  //   console.log('stdout: ' + stdout);
+  //   // console.log('stderr: ' + stderr);
+  //   if (error !== null) {
+  //     console.log('exec error: ' + error);
+  //   }
+  // });
 }
 
 // production only
@@ -142,16 +142,16 @@ if ('production' == app.get('env')) {
 routes(app, checkAuth);
 
 // crawler
-var netEaseCrawler = function () {
-  var h = new Date().getHours();
-  var s1 = 8;
-  var e1 = 12;
-  var s2 = 15;
-  var e2 = 20;
-  if ((h > s1 && h < e1) || (h > s2 && h < e2)) {
-    crawlerInterval();
-  }
-};
+// var netEaseCrawler = function () {
+//   var h = new Date().getHours();
+//   var s1 = 8;
+//   var e1 = 12;
+//   var s2 = 15;
+//   var e2 = 20;
+//   if ((h > s1 && h < e1) || (h > s2 && h < e2)) {
+//     crawlerInterval();
+//   }
+// };
 
 
 
@@ -187,8 +187,17 @@ var netEaseCrawler = function () {
 
 // }
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express Start at http://127.0.0.1:" + app.get('port'));
-  // console.log(CONFIG.interval);
-  setInterval(netEaseCrawler, CONFIG.interval);
-});
+// http.createServer(app).listen(app.get('port'), function(){
+//   console.log("Express Start at http://127.0.0.1:" + app.get('port'));
+//   // console.log(CONFIG.interval);
+//   setInterval(netEaseCrawler, CONFIG.interval);
+// });
+
+
+if (require.main === module) {
+  http.createServer(app).listen(app.get('port'), function(){
+    console.log("Express Start at http://127.0.0.1:" + app.get('port'));
+  });
+}
+
+

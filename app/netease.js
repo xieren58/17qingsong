@@ -14,7 +14,7 @@ var moment = require('moment');
 var _ = require("lodash");
 var cheerio = require('cheerio');
 
-var tt = require('./config').Config.tt;
+var tt = require('config').Config.tt;
 var News = require('./models/news');
 
 var headers = {
