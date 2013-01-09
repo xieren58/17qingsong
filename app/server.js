@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+
+process.env.TZ = require('config').Config.timezone;
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 
