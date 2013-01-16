@@ -187,9 +187,21 @@ var getDetail = function(docid, tag, mustUpdate) {
                   obj['marked'] = obj['marked'].replace(l['ref'],
                   util.format('<a href="http://3g.163.com/touch/article.html?docid=%s" target="_blank" title="%s">%s</a>',
                     lid, l['title'], l['title']));
-                } else {
+                } else if (! l['id']) {
                   obj['marked'] = obj['marked'].replace(l['ref'],
-                  util.format('<a href="/news/%s" target="_blank" title="%s">%s</a>', l['id'], l['title'], l['title']));
+                  util.format('<a href="%s" target="_blank" title="%s">%s</a>', l['href'], l['title'], l['title']));
+                } else {
+                  News.findOne({docid: l['id']}, function (err, result) {
+                    if (err || ! result) {
+                      obj['marked'] = obj['marked'].replace(l['ref'],
+                      util.format('<a href="http://3g.163.com/touch/article.html?docid=%s" target="_blank" title="%s">%s</a>',
+                        l['id'], l['title'], l['title']));
+                    } else {
+                      obj['marked'] = obj['marked'].replace(l['ref'],
+                      util.format('<a href="/news/%s" target="_blank" title="%s">%s</a>', l['id'], l['title'], l['title']));
+                    }
+                  });
+                  
                 }
                 
               });
