@@ -1,0 +1,23 @@
+
+<template name="tag">
+{{#if newssLoading}}
+    <em><i class="icon-refresh"></i> 正在为你准备内容 ...</em>
+{{else}}
+<ul class="unstyled topic-list">
+    {{#each newss}}
+    <li>
+        <a title="{{title}}" href="/news/{{docid}}">
+          <img src="{{miniImg cover}}" alt="{{title}}">
+        </a>
+        <h3><a href="/news/{{docid}}" class="bigger-size">
+            {{title}}
+        </a></h3>
+        <time>{{dateFormat time}},</time> <span class="view-count"><strong>{{#if views}}{{views}}{{else}}2{{/if}}</strong> 人围观</span>
+        <a href="/news/{{this.docid}}"><p>{{{digest}}} ...</p></a>
+    </li>
+    {{/each}}
+</ul>
+
+{{> pagination}}
+{{/if}}
+</template>

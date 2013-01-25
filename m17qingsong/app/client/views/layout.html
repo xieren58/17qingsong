@@ -1,0 +1,73 @@
+<head>
+<meta charset="utf-8">
+<title>让你每日轻松一刻 - 17轻松</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="网易每日轻松一刻,每日轻松一刻,轻松一刻,今日之声,科技万有瘾力,娱乐BigBang,17轻松,一起轻松" />
+<meta name="description" content="17轻松，让你每日轻松一刻！">
+<!-- <meta name="author" content="">
+-->
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<link rel="shortcut icon" href="/favicon.ico" />
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="http://www.17qingsong.com">17轻松</a>
+      <div class="nav-collapse collapse">
+        {{> navBar}}
+      </div>
+      <!--/.nav-collapse --> </div>
+  </div>
+</div>
+
+<div class="container">
+  <!--[if lt IE 7]>
+  <p class="chromeframe">
+    你还在使用 <strong>IE6</strong>？请<a href="http://browsehappy.com/">升级到IE7以上</a>
+    或者<a href="http://www.google.com/chromeframe/?redirect=true">启用 Google Chrome Frame</a>以获得更好的体验.
+  </p>
+  <![endif]-->
+  <div id="main"></div>
+  <footer>
+    <hr>
+    <p>
+      &copy;2012
+      <a href="http://www.17qingsong.com">17轻松</a>
+    </p>
+  </footer>
+</div>
+</body>
+
+<template name="navBar">
+<ul class="nav">
+  <li id="home" class="{{currentTab 'home'}}">
+    <a href="/">首页</a>
+  </li>
+  <li id="relaxedMoment" class="{{currentTab '每日轻松一刻'}}">
+    <a href="/tag/{{urlEncode '每日轻松一刻'}}">每日轻松一刻</a>
+  </li>
+  <li id="todayVoice" class="{{currentTab '今日之声'}}">
+    <a href="/tag/{{urlEncode '今日之声'}}">今日之声</a>
+  </li>
+  <li id="tech" class="{{currentTab '科技万有瘾力'}}">
+    <a href="/tag/{{urlEncode '科技万有瘾力'}}">科技万有瘾力</a>
+  </li>
+  <li id="entertainmentBigBang" class="{{currentTab '娱乐BigBang'}}">
+    <a href="/tag/{{urlEncode '娱乐BigBang'}}">娱乐BigBang</a>
+  </li>
+  <li id="about" class="{{currentTab 'about'}}">
+    <a href="/about">关于</a>
+  </li>
+</ul>
+</template>

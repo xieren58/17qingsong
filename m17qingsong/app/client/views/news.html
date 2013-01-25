@@ -1,0 +1,30 @@
+
+
+<template name="news">
+{{#with news}}
+{{#if news}}
+<div class="news">
+  <div class="page-header">
+    <h2>{{title}}</h2>
+    <small>
+        <em>{{ptime}}, 
+            &nbsp;&nbsp;{{tags}},
+            &nbsp;&nbsp;{{#if views}}{{views}}{{else}}2{{/if}} 人围观
+        </em>
+    </small>
+  </div>
+
+  <div class="news-content content-{{tag}}">
+    {{{marked}}}
+  </div>
+  <p><a href="http://3g.163.com/touch/article.html?docid={{docid}}" target="_blank">原文链接</a></p>
+
+</div>
+
+<div class="clearfix"></div>
+<hr/>
+{{else}}
+<em><i class="icon-refresh"></i> 正在为你准备内容 ...</em>
+{{/if}}
+{{/with}}
+</template>

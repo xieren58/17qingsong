@@ -2,3 +2,5 @@ node_modules
 dump_*
 practice
 tmp/
+local
+meteorite
