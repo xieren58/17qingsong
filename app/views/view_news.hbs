@@ -19,15 +19,7 @@
   </div>
 
   <div class="news-content content-{{tag2c news.tags.[0]}}">
-    <p>【由于收到网易新闻客户端的警告信，为避免版权法律问题，本站将不再提供内容，请大家点击网易原文链接去看原文，谢谢。】</p>
-    <p>如有任何建议或疑问，都欢迎电邮至：</p>
-    <p><img alt="mail" src="/img/mail.png"></p>
-    <div class="alert alert-error">
-    <a target="_blank" href="http://www.oschina.net/cf-app-show" title="投票">
-       请大家帮忙投“17轻松”一票，谢谢。<strong>点击去投票</strong></a>
-    </div>
-    <p>【谢谢大家支持，本站源码将会在过年回来开源，敬请期待。】</p>
-    <p><a href="http://3g.163.com/touch/article.html?docid={{news.docid}}" target="_blank">网易原文链接</a></p>
+    <p>【免责声明:本文均来自互联网收集而来，版权归原创者所有，如果侵犯了你的权益，请通知我们，我们会及时删除侵权内容，谢谢合作！<a href="http://3g.163.com/touch/article.html?docid={{news.docid}}" target="_blank">网易原文链接</a>】</p>
     <br />
     <br />
    {{{news.marked}}}
@@ -76,7 +68,7 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 {{#if relatedNews}}
 <div class="row">
 <div class="related-news span12">
-<strong>您也感兴趣...</strong>
+<strong>瞧瞧其他...</strong>
 <br/><br/>
 <ul class="thumbnails span12">
   {{#each relatedNews}}
