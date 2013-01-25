@@ -19,8 +19,8 @@ var News = require('./models/news');
 
 var headers = {
     // 'User-Agent': 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11',
-    'User-Agent': 'NTES Android'
-    // 'Referer': 'http://www.163.com/'
+    'User-Agent': 'NTES Android',
+    'Referer': 'http://www.163.com/'
 };
 
 /**
