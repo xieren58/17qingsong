@@ -37,8 +37,8 @@ body {
 
 .topic-list li {
   height: auto !important;
-  height: 150px;
-  min-height: 150px;
+  /*height: 150px;*/
+  /*min-height: 150px;*/
   margin: 16px 0 20px 0;
   padding: 6px 0 16px 0;
   line-height: 22px;

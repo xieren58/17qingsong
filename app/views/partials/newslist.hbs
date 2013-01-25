@@ -5,11 +5,13 @@
           <img class="lazy" src="/img/grey.gif" data-original="{{miniImg this.cover '200x150'}}" alt="{{this.title}}">
           <noscript><img src="{{miniImg this.cover '200x150'}}" alt="{{this.title}}"></noscript>
         </a>
-        <h3><a href="/news/{{this.docid}}" class="bigger-size">
+        <h3><a target="_blank" href="http://3g.163.com/touch/article.html?docid={{docid}}" class="bigger-size">
             {{this.title}}
         </a></h3>
-        <time>{{dateFormat this.time}},</time> <span class="view-count"><strong>{{#if this.views}}{{this.views}}{{else}}2{{/if}}</strong> 人围观,</span> <span class="ds-thread-count" data-thread-key="{{docid}}"></span><span class="download">,<a title="下载txt" href="/d/{{docid}}.txt">下载({{#if download}}{{download}}{{else}}0{{/if}})</a></span>
-        <a href="/news/{{this.docid}}"><p>{{{this.digest}}} ...</p></a>
+        <time>{{dateFormat this.time}}</time>
+         <!-- <span class="view-count"><strong>{{#if this.views}}{{this.views}}{{else}}2{{/if}}</strong> 人围观,</span> <span class="ds-thread-count" data-thread-key="{{docid}}"></span> -->
+         <span class="download">,<a title="下载txt" href="/d/{{docid}}.txt">下载({{#if download}}{{download}}{{else}}0{{/if}})</a></span>
+        <a target="_blank" href="http://3g.163.com/touch/article.html?docid={{docid}}"><p>{{{digest}}} ...</p></a>
     </li>
     {{/each}}
 
