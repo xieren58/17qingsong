@@ -59,13 +59,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser(CONFIG.cookieSecret));
 
-// app.use(express.session());
-app.use(express.session({
-  secret: CONFIG.cookieSecret,
-  store: new MongoStore({
-    url: dbUrl
-  })
-}));
+app.use(express.session());
+// app.use(express.session({
+//   secret: CONFIG.cookieSecret,
+//   store: new MongoStore({
+//     url: dbUrl
+//   })
+// }));
 
 app.use(express.csrf());
 app.use(function (req, res, next) {

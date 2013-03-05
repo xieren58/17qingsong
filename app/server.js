@@ -23,16 +23,41 @@ var netEaseCrawler = function () {
   }
 };
 
-if (cluster.isMaster) {
-  // Fork workers.
-  numCPUs = numCPUs > 2 ? 2 : numCPUs;
-  for (var i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
-  cluster.on('exit', function(worker, code, signal) {
-    console.log('worker ' + worker.process.pid + ' died');
-  });
+// if (cluster.isMaster) {
+//   // Fork workers.
+//   numCPUs = numCPUs > 2 ? 2 : numCPUs;
+//   for (var i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
+//   cluster.on('exit', function(worker, code, signal) {
+//     console.log('worker ' + worker.process.pid + ' died');
+//   });
 
+//   setInterval(netEaseCrawler, interval);
+
+//   if ('development' == app.get('env')) {
+//     var child = null;
+
+//     child = exec('grunt', function (error, stdout, stderr) {
+//       console.log('stdout: ' + stdout);
+//       // console.log('stderr: ' + stderr);
+//       if (error !== null) {
+//         console.log('exec error: ' + error);
+//       }
+//     });
+//   }
+// } else {
+//   // Workers can share any TCP connection
+//   // In this case its a HTTP server
+//   http.createServer(app).listen(app.get('port'), function(){
+//     console.log("Express Start at http://127.0.0.1:" + app.get('port'));
+//   });
+
+// }
+
+
+// remove cluster
+http.createServer(app).listen(app.get('port'), function(){
   setInterval(netEaseCrawler, interval);
 
   if ('development' == app.get('env')) {
@@ -46,11 +71,5 @@ if (cluster.isMaster) {
       }
     });
   }
-} else {
-  // Workers can share any TCP connection
-  // In this case its a HTTP server
-  http.createServer(app).listen(app.get('port'), function(){
-    console.log("Express Start at http://127.0.0.1:" + app.get('port'));
-  });
-
-}
+  console.log("Express Start at http://127.0.0.1:" + app.get('port'));
+});
