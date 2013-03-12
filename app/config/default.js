@@ -7,7 +7,7 @@ module.exports = {
     salt: '#$%%^^^',
     port: 3000,
     interval: 1000 * 60 * 10,
-    staticMaxAge: 3600000 * 24 * 15,
+    staticMaxAge: 3600000 * 24 * 1,
     limit: 15,
     hotQty: 4,
     maxRssItems: 50,

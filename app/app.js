@@ -77,7 +77,8 @@ app.use(function (req, res, next) {
 app.use(flash());
 app.use(app.router);
 // app.use(require('stylus').middleware(__dirname + '/public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.compress());
+app.use(express.static(path.join(__dirname, 'public'), {maxAge: CONFIG.staticMaxAge}));
 app.disable('x-powered-by');
 
 // });
@@ -119,7 +120,7 @@ if ('production' == app.get('env')) {
   // app.set('db uri', 'n.n.n.n/prod');
   // app.use(express.errorHandler());
   // app.use(express.static(path.join(__dirname, 'public'),  { maxAge: CONFIG.staticMaxAge }));
-  app.use(express.compress());
+  // app.use(express.compress());
   // 500
   app.use(function(err, req, res, next){
     // we may use properties of the error object
