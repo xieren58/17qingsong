@@ -1,6 +1,7 @@
 
 
-var mongoskin = require('mongoskin');
+// var mongoskin = require('mongoskin');
+var mongojs = require('mongojs');
 
 var generateMongoUrl = function(){
   obj = {};
@@ -26,4 +27,5 @@ var dbUrl = generateMongoUrl();
 
 
 exports.dbUrl = dbUrl;
-exports.db = mongoskin.db(dbUrl, {safe: true});
+// exports.db = mongoskin.db(dbUrl, {safe: true});
+exports.db = mongojs(dbUrl);

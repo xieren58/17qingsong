@@ -4,7 +4,8 @@
 var db = require('../db').db;
 var limit = require('config').Config.limit;
 
-db.bind('news');
+// db.bind('news');
+var news = db.collection('news');
 
 /**
  * News:
@@ -28,7 +29,7 @@ db.bind('news');
 
 exports.page = function (query, page, callback) {
 
-  db.news.count(query, function (err, count) {
+  news.count(query, function (err, count) {
     if (!err) {
 
       var maxPage = Math.ceil(count / limit);
@@ -53,7 +54,7 @@ exports.page = function (query, page, callback) {
 
       var skipFrom = (currentPage - 1) * limit;
 
-      db.news.find(query).sort({time:-1}).skip(skipFrom).limit(limit).toArray(function (err, result) {
+      news.find(query).sort({time:-1}).skip(skipFrom).limit(limit).toArray(function (err, result) {
         if (!err) {
           // callback(err, prevPage, nextPage, result);
           callback(err, currentPage, maxPage, result);
@@ -69,57 +70,57 @@ exports.page = function (query, page, callback) {
 
 
 exports.insert = function (obj, callback) {
-  db.news.insert(obj, function (err, result) {
+  news.insert(obj, function (err, result) {
     callback(err, null);
   });
 };
 
 exports.get = function (id, callback) {
-  db.news.findById(id, function (err, result) {
+  news.findById(id, function (err, result) {
     callback(err, result);
   });
 };
 
 exports.findOne = function (query, callback) {
-  db.news.findOne(query, function (err, result) {
+  news.findOne(query, function (err, result) {
     callback(err, result);
   });
 };
 
 exports.findLimit = function (query, limit, sort, callback) {
   sort = sort ? sort : {time: -1};
-  db.news.find(query).sort(sort).limit(limit).toArray(function (err, result) {
+  news.find(query).sort(sort).limit(limit).toArray(function (err, result) {
     callback(err, result);
   });
 };
 
 
 exports.all = function (callback) {
-  db.news.find().sort({time: -1}).toArray(function (err, result) {
+  news.find().sort({time: -1}).toArray(function (err, result) {
     callback(err, result);
   });
 };
 
 exports.delAll = function (callback) {
-    db.news.remove({}, function (err, result) {
+    news.remove({}, function (err, result) {
         callback(err, result);
     });
 };
 
 exports.update = function (query, doc, callback) {
-  db.news.update(query, {$set: doc}, function (err, result) {
+  news.update(query, {$set: doc}, function (err, result) {
     callback(err, result);
   });
 };
 
 exports.incViews = function (query, doc, callback) {
-  db.news.update(query, {$inc: doc}, function (err, result) {
+  news.update(query, {$inc: doc}, function (err, result) {
     callback(err, result);
   });
 };
 
 exports.del = function (query, callback) {
-    db.news.remove(query, function (err, result) {
+    news.remove(query, function (err, result) {
         callback(err, result);
     });
 };

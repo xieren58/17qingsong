@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 process.env.TZ = require('config').Config.timezone;
-var cluster = require('cluster');
-var numCPUs = require('os').cpus().length;
+// var cluster = require('cluster');
+// var numCPUs = require('os').cpus().length;
 
 var http = require('http');
-var exec = require('child_process').exec;
+// var exec = require('child_process').exec;
 
 var interval = require('config').Config.interval;
 var app = require('./app');
@@ -58,18 +58,19 @@ var netEaseCrawler = function () {
 
 // remove cluster
 http.createServer(app).listen(app.get('port'), function(){
+
   setInterval(netEaseCrawler, interval);
 
-  if ('development' == app.get('env')) {
-    var child = null;
+  // if ('development' == app.get('env')) {
+  //   var child = null;
 
-    child = exec('grunt', function (error, stdout, stderr) {
-      console.log('stdout: ' + stdout);
-      // console.log('stderr: ' + stderr);
-      if (error !== null) {
-        console.log('exec error: ' + error);
-      }
-    });
-  }
+  //   child = exec('grunt', function (error, stdout, stderr) {
+  //     console.log('stdout: ' + stdout);
+  //     // console.log('stderr: ' + stderr);
+  //     if (error !== null) {
+  //       console.log('exec error: ' + error);
+  //     }
+  //   });
+  // }
   console.log("Express Start at http://127.0.0.1:" + app.get('port'));
 });

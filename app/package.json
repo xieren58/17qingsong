@@ -9,24 +9,22 @@
     "start": "node server"
   },
   "dependencies": {
-    "express": "~3.0.0",
+    "express": ">=3.0.0",
     "express-hbs": "*",
-    "mongoskin": "*",
     "moment": "*",
     "connect-flash": "*",
     "request": "*",
     "async": "*",
     "rss": "*",
     "cheerio": "*",
-    "connect-mongo": "*",
     "lodash": "*",
-    "config": "*"
+    "config": "*",
+    "mongojs": "*"
   },
   "devDependencies": {
-    "colors": "*",
     "grunt": "~0.4.0",
-    "grunt-contrib-mincss": "~0.3.2",
-    "grunt-contrib-uglify": "~0.1.0"
+    "grunt-contrib-cssmin": "~0.4.2",
+    "grunt-contrib-uglify": ">=0.1.0"
   },
   "engines": {
     "node": ">= 0.6.0"

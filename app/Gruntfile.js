@@ -2,7 +2,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    mincss: {
+    cssmin: {
       compress: {
         files: {
           "./public/css/all.css": ["../assets/css/style.css"]
@@ -23,9 +23,9 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-mincss');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['mincss', 'uglify']);
+  grunt.registerTask('default', ['cssmin', 'uglify']);
 
 };

@@ -15,8 +15,8 @@ var path = require('path');
 // var numCPUs = require('os').cpus().length;
 
 var express = require('express');
-var MongoStore = require('connect-mongo')(express);
-var dbUrl = require('./db').dbUrl;
+// var MongoStore = require('connect-mongo')(express);
+// var dbUrl = require('./db').dbUrl;
 
 var hbs = require('express-hbs');
 var flash = require('connect-flash');
